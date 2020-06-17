@@ -22,3 +22,5 @@ const AuthManager = {
     }).then((resp) => resp.json());
   },
 };
+
+export default AuthManager

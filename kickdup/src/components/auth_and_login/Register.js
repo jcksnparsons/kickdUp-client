@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import AuthManager from "../../modules/AuthManager"
 
-const Login = ({ routerProps }) => {
+const Register = ({ routerProps }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [credentials, setCredentials] = useState({
     username: "",
@@ -13,19 +14,29 @@ const Login = ({ routerProps }) => {
     setCredentials(stateToChange);
   };
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
     const customerCreds = {
       username: credentials.username,
+      email: credentials.email,
       password: credentials.password,
     };
+
+    return AuthManager.register(customerCreds).then(resp => {
+        console.log(resp)
+        if ("token" in resp) {
+            sessionStorage.setItem("token", resp.token);
+            setLoggedIn(true)
+        }
+    }).then(() => routerProps.history.push("/"))
+
   };
 
   return (
     <div>
       <section>
-        <form onSubmit={handleLogin}>
-          <h1>Login</h1>
+        <form onSubmit={handleRegister}>
+          <h1>Create a new account</h1>
           <fieldset>
             <label htmlFor="username">Username</label>
             <input
@@ -34,6 +45,16 @@ const Login = ({ routerProps }) => {
               id="username"
               placeholder="Username"
               value={credentials.username}
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="email">Email</label>
+            <input
+              onChange={handleFieldChange}
+              type="text"
+              id="email"
+              placeholder="Email"
+              value={credentials.email}
             />
           </fieldset>
           <fieldset>
@@ -46,8 +67,13 @@ const Login = ({ routerProps }) => {
               value={credentials.password}
             />
           </fieldset>
+          <fieldset>
+              <button type="Submit">Register</button>
+          </fieldset>
         </form>
       </section>
     </div>
   );
 };
+
+export default Register
