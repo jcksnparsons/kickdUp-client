@@ -9,6 +9,9 @@ const PostManager = {
       .then((resp) => resp.json())
       .then((posts) => posts.filter((post) => (post.user_id = user_id)));
   },
+  getOne(id) {
+    return fetch(`${baseUrl}/posts/${id}`).then((resp) => resp.json());
+  },
 };
 
-export default PostManager
+export default PostManager;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserRetrieve from "../../modules/UserRetrieve";
 import PostManager from "../../modules/PostManager";
+import PostCard from "../posts/PostCard";
 
 const Profile = ({ routerProps }) => {
   const [user, setUser] = useState({ username: "" });
@@ -22,15 +23,18 @@ const Profile = ({ routerProps }) => {
   }, []);
 
   const createPosts = (postArray) => {
-    return postArray.map((post) => {
-    return <p>{post.manufacturer.name}<br/>{post.model}<br/>{post.colorway}<br/><em>{post.description}</em></p>;
-    });
+    if (postArray.length > 0) {
+      return postArray.map((post) => {
+          console.log(post)
+        return <PostCard key={post.id} post={post} />;
+      });
+    }
   };
 
   return (
     <div>
       <h1>{user.username}</h1>
-      {createPosts(userPosts)}
+      {user.username ? createPosts(userPosts) : null}
     </div>
   );
 };
