@@ -19,6 +19,10 @@ const PostDetail = (props) => {
     });
   };
 
+  const deletePost = () => {
+      PostManager.deletePost(postId).then(props.routerProps.history.push("/"))
+  }
+
   useEffect(() => {
     getPost();
   }, []);
@@ -31,6 +35,7 @@ const PostDetail = (props) => {
       <em>
         <h1>{details.description}</h1>
       </em>
+      <button onClick={() => deletePost()}>Delete Post</button>
     </>
   );
 };
