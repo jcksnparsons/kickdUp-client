@@ -4,6 +4,7 @@ import Register from "./auth_and_login/Register";
 import Login from "./auth_and_login/Login";
 import Profile from "./user_profile/Profile";
 import PostAddForm from "./posts/PostAddForm";
+import PostDetail from "./posts/PostDetail";
 
 const BodyRouter = (props) => {
   return (
@@ -34,6 +35,13 @@ const BodyRouter = (props) => {
         path="/newpost"
         render={(routerProps) => {
           return <PostAddForm routerProps={routerProps} />;
+        }}
+      />
+      <Route
+        exact
+        path="/posts/:postId(\d+)"
+        render={(routerProps) => {
+          return <PostDetail routerProps={routerProps} />;
         }}
       />
     </Switch>
