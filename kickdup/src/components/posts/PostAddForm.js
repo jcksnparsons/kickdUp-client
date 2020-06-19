@@ -12,8 +12,6 @@ const PostAddForm = (props) => {
   const [manufacturers, setManufacturers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(props.routerProps);
-
   const handleFieldChange = (evt) => {
     const stateToChange = { ...postInfo };
     stateToChange[evt.target.id] = evt.target.value;
@@ -35,10 +33,6 @@ const PostAddForm = (props) => {
   useEffect(() => {
     getManufacturersFromAPI();
   }, []);
-
-  useEffect(() => {
-      console.log(postInfo)
-  }, [postInfo])
 
   return (
     <>
