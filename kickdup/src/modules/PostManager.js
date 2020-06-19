@@ -23,6 +23,14 @@ const PostManager = {
       body: JSON.stringify(newPost),
     }).then((resp) => resp.json());
   },
+  deletePost(post_id) {
+    return fetch(`${baseUrl}/posts/${post_id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${sessionStorage.getItem("token")}`,
+      },
+    });
+  },
 };
 
 export default PostManager;
