@@ -12,6 +12,17 @@ const PostManager = {
   getOne(id) {
     return fetch(`${baseUrl}/posts/${id}`).then((resp) => resp.json());
   },
+  post(newPost) {
+    return fetch(`${baseUrl}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Token ${sessionStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(newPost),
+    }).then((resp) => resp.json());
+  },
 };
 
 export default PostManager;
