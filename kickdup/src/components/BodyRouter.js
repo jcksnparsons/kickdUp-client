@@ -5,6 +5,7 @@ import Login from "./auth_and_login/Login";
 import Profile from "./user_profile/Profile";
 import PostAddForm from "./posts/PostAddForm";
 import PostDetail from "./posts/PostDetail";
+import UpdateCommentForm from "./comments/UpdateComment"
 
 const BodyRouter = (props) => {
   return (
@@ -44,6 +45,12 @@ const BodyRouter = (props) => {
           return <PostDetail routerProps={routerProps} />;
         }}
       />
+      <Route
+        path="/comments/:commentId(\d+)/edit"
+        render={(routerProps) => {
+          return <UpdateCommentForm routerProps={routerProps} />
+        }}
+        />
     </Switch>
   );
 };

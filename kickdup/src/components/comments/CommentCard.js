@@ -1,5 +1,6 @@
 import React from "react";
 import UserManager from "../../modules/UserRetrieve";
+import UpdateCommentForm from "./UpdateComment"
 
 const CommentCard = (props) => {
   async function verifyUser() {
@@ -15,11 +16,15 @@ const CommentCard = (props) => {
 
   return (
     <>
+      <h4><em>{props.comment.user.username}</em></h4>
       <h2>{props.comment.content}</h2>
       {verifyUser() ? (
-        <button onClick={() => props.deleteComment(props.comment.id)}>
-          Delete
-        </button>
+        <div>
+          <button onClick={() => props.routerProps.history.push(`/comments/${props.comment.id}/edit`)}>Edit</button>
+          <button onClick={() => props.deleteComment(props.comment.id)}>
+            Delete
+          </button>
+        </div>
       ) : null}
     </>
   );
