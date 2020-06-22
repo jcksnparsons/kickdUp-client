@@ -8,15 +8,23 @@ const CommentManager = {
   },
   post(newComment) {
     return fetch(`${baseUrl}/comments`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Token ${sessionStorage.getItem("token")}`,
-        },
-        body: JSON.stringify(newComment)
-    }).then(resp => resp.json())
-  }
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Token ${sessionStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(newComment),
+    }).then((resp) => resp.json());
+  },
+  delete(comment_id) {
+    return fetch(`${baseUrl}/comments/${comment_id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${sessionStorage.getItem("token")}`,
+      },
+    });
+  },
 };
 
-export default CommentManager
+export default CommentManager;

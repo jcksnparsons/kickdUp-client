@@ -5,7 +5,6 @@ import CommentCard from "../comments/CommentCard";
 
 const PostDetail = (props) => {
   const postId = props.routerProps.match.params.postId;
-  const currentLocation = props.routerProps.location.pathname
 
   const [details, setDetails] = useState({
     manufacturer: { name: "" },
@@ -20,7 +19,6 @@ const PostDetail = (props) => {
   });
 
   const getPost = () => {
-    console.log(props.routerProps);
     PostManager.getOne(postId).then((resp) => {
       setDetails(resp);
     });
@@ -33,8 +31,7 @@ const PostDetail = (props) => {
   };
 
   const handleCommentSubmit = () => {
-    CommentManager.post(newCommentContent)
-    ;
+    CommentManager.post(newCommentContent);
   };
 
   const deletePost = () => {
@@ -46,6 +43,10 @@ const PostDetail = (props) => {
   const getComments = () => {
     CommentManager.getForPost(postId).then((resp) => setComments(resp));
   };
+
+  const deleteComment = (comment_id) => {
+    CommentManager.delete(comment_id).then(() => getComments())
+  }
 
   useEffect(() => {
     getPost();
@@ -79,7 +80,7 @@ const PostDetail = (props) => {
         </button>
       </form>
       {comments.map((comment) => {
-        return <CommentCard comment={comment} />;
+        return <CommentCard comment={comment} deleteComment={deleteComment} />;
       })}
     </>
   );
