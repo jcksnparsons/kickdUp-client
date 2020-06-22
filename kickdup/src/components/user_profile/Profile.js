@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import UserRetrieve from "../../modules/UserRetrieve";
+import UserManager from "../../modules/UserRetrieve";
 import PostManager from "../../modules/PostManager";
 import PostCard from "../posts/PostCard";
 
@@ -8,7 +8,7 @@ const Profile = ({ routerProps }) => {
   const [userPosts, setUserPosts] = useState([]);
 
   const getUser = (user_id) => {
-    UserRetrieve(user_id).then((resp) => setUser(resp));
+    UserManager.userRetrieve(user_id).then((resp) => setUser(resp));
   };
 
   const getPosts = (user_id) => {
