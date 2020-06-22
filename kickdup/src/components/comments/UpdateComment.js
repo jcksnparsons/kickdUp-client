@@ -17,17 +17,15 @@ const UpdateCommentForm = (props) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     CommentManager.editComment(commentInfo.id, commentInfo.content).then(
-      props.routerProps.history.push(`/posts/${commentInfo.post_id}`)
+      () => props.routerProps.history.push(`/posts/${commentInfo.post_id}`)
     );
   };
 
   useEffect(() => {
     getCommentInfo();
   }, []);
-
-  console.log(commentInfo);
 
   return (
     <form>

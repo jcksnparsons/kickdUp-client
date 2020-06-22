@@ -44,21 +44,13 @@ const PostDetail = (props) => {
     CommentManager.getForPost(postId).then((resp) => setComments(resp));
   };
 
-  const updateComment = (comment_id, content) => {
-    CommentManager.editComment(comment_id, content).then(() => getComments())
-  }
-
   const deleteComment = (comment_id) => {
-    CommentManager.delete(comment_id).then(() => getComments())
-  }
+    CommentManager.delete(comment_id).then(() => getComments());
+  };
 
   useEffect(() => {
     getPost();
-  }, []);
-
-  useEffect(() => {
     getComments();
-    console.log(comments)
   }, []);
 
   return (
@@ -85,7 +77,13 @@ const PostDetail = (props) => {
         </button>
       </form>
       {comments.map((comment) => {
-        return <CommentCard comment={comment} updateComment={updateComment} deleteComment={deleteComment} {...props}/>;
+        return (
+          <CommentCard
+            comment={comment}
+            deleteComment={deleteComment}
+            {...props}
+          />
+        );
       })}
     </>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import UserManager from "../../modules/UserRetrieve";
-import UpdateCommentForm from "./UpdateComment"
 
 const CommentCard = (props) => {
   async function verifyUser() {
