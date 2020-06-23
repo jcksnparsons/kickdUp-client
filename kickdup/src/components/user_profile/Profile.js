@@ -25,8 +25,8 @@ const Profile = ({ routerProps }) => {
   const createPosts = (postArray) => {
     if (postArray.length > 0) {
       return postArray.map((post) => {
-          console.log(post)
-        return <PostCard key={post.id} post={post} />;
+        console.log(post);
+        return <PostCard key={post.id} post={post} routerProps={routerProps} />;
       });
     }
   };
