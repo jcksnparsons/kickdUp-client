@@ -17,7 +17,7 @@ const PostCard = (props) => {
 
   return (
     <>
-      {firstPhoto ? <img src={firstPhoto.image} alt="photo" height="125" width="125" /> : null}
+      {firstPhoto ? <img src={firstPhoto.image} alt="photo" height="auto" width="180" /> : null}
       <p>{props.post.manufacturer.name}</p>
       <p>{props.post.model}</p>
     </>
