@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import PhotoManager from "../../modules/PhotoManager";
 
 const PostCard = (props) => {
+  console.log(props);
+  const [firstPhoto, setFirstPhoto] = useState({ image: null });
 
-    return (
-        <>
-            <p>{props.post.manufacturer.name}</p>
-            <p>{props.post.model}</p>
-        </>
-    )
-}
+  const getPhoto = () => {
+    PhotoManager.getPhotosForPost(props.post.id).then((resp) =>
+      setFirstPhoto(resp[0])
+    );
+  };
 
-export default PostCard
+  useEffect(() => {
+    getPhoto();
+  }, []);
+
+  return (
+    <>
+      {firstPhoto ? <img src={firstPhoto.image} alt="photo" height="125" width="125" /> : null}
+      <p>{props.post.manufacturer.name}</p>
+      <p>{props.post.model}</p>
+    </>
+  );
+};
+
+export default PostCard;
