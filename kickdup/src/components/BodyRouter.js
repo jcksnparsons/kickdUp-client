@@ -6,6 +6,7 @@ import Profile from "./user_profile/Profile";
 import PostAddForm from "./posts/PostAddForm";
 import PostDetail from "./posts/PostDetail";
 import UpdateCommentForm from "./comments/UpdateComment"
+import PhotoAddForm from "./photos/PhotoAddForm";
 
 const BodyRouter = (props) => {
   return (
@@ -43,6 +44,13 @@ const BodyRouter = (props) => {
         path="/posts/:postId(\d+)"
         render={(routerProps) => {
           return <PostDetail routerProps={routerProps} />;
+        }}
+      />
+      <Route
+        exact
+        path="/posts/:postId(\d+)/addphoto"
+        render={(routerProps) => {
+          return <PhotoAddForm routerProps={routerProps} />;
         }}
       />
       <Route
