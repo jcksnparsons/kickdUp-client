@@ -3,6 +3,7 @@ import PostManager from "../../modules/PostManager";
 import CommentManager from "../../modules/CommentManager";
 import CommentCard from "../comments/CommentCard";
 import PhotoManager from "../../modules/PhotoManager";
+import PhotoComponent from "../photos/PhotoComponent"
 
 const PostDetail = (props) => {
   const postId = props.routerProps.match.params.postId;
@@ -56,6 +57,10 @@ const PostDetail = (props) => {
     CommentManager.delete(comment_id).then(() => getComments());
   };
 
+  const deletePhoto = (photo_id) => {
+    PhotoManager.deletePhoto(photo_id).then(() => getPhotos())
+  }
+
   useEffect(() => {
     getPost();
     getComments();
@@ -64,7 +69,7 @@ const PostDetail = (props) => {
 
   return (
     <>
-      {photos.map(photo => {return <img src={photo.image} alt="photo" width="250" height="auto" />})}
+      {photos.map(photo => {return <PhotoComponent key={photo.id} photo={photo} deletePhoto={deletePhoto}/>})}
       <h1>{details.manufacturer.name}</h1>
       <h1>{details.model}</h1>
       <h1>{details.colorway}</h1>
