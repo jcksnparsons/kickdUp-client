@@ -16,6 +16,14 @@ const PhotoManager = {
       body: newPhoto,
     });
   },
+  deletePhoto(photo_id) {
+    return fetch(`${baseUrl}/photos/${photo_id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${sessionStorage.getItem("token")}`,
+      },
+    });
+  },
 };
 
 export default PhotoManager;
