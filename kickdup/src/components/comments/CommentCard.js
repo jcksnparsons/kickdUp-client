@@ -1,14 +1,14 @@
 import React from "react";
 
 const CommentCard = (props) => {
-
   return (
     <>
       <h4>
         <em>{props.comment.user.username}</em>
       </h4>
       <h2>{props.comment.content}</h2>
-      {props.currentUser.id === props.comment.user_id ? (
+      {props.currentUser !== null &&
+      props.currentUser.id === props.comment.user_id ? (
         <div>
           <button
             onClick={() =>

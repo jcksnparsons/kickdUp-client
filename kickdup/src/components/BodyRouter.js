@@ -15,6 +15,7 @@ const BodyRouter = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   const getUser = () => {
+    console.log("getUser")
     UserManager.getCurrentUser().then((resp) => setCurrentUser(resp[0]));
   };
 

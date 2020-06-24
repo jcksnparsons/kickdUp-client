@@ -57,7 +57,9 @@ const PostDetail = (props) => {
   };
 
   const makeButtons = () => {
-    if (details !== null) {
+    console.log("This needs user info!")
+    console.log(props.currentUser)
+    if (details !== null && props.currentUser !== null) {
       return props.currentUser.id === details.user_id ? (
         <button onClick={() => deletePost()}>Delete Post</button>
       ) : null;
