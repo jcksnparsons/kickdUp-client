@@ -21,7 +21,7 @@ const PostAddForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    PostManager.post(postInfo).then(props.routerProps.history.push("/"));
+    PostManager.post(postInfo).then(resp => props.routerProps.history.push(`/posts/${resp.id}/addphoto`));
   };
 
   const getManufacturersFromAPI = () => {

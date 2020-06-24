@@ -3,17 +3,12 @@ import PostManager from "../../modules/PostManager";
 import CommentManager from "../../modules/CommentManager";
 import CommentCard from "../comments/CommentCard";
 import PhotoManager from "../../modules/PhotoManager";
-import PhotoComponent from "../photos/PhotoComponent"
+import PhotoComponent from "../photos/PhotoComponent";
 
 const PostDetail = (props) => {
   const postId = props.routerProps.match.params.postId;
 
-  const [details, setDetails] = useState({
-    manufacturer: { name: "" },
-    model: "",
-    colorway: "",
-    description: "",
-  });
+  const [details, setDetails] = useState(null);
   const [comments, setComments] = useState([]);
   const [newCommentContent, setNewCommentContent] = useState({
     post_id: postId,
@@ -58,50 +53,71 @@ const PostDetail = (props) => {
   };
 
   const deletePhoto = (photo_id) => {
-    PhotoManager.deletePhoto(photo_id).then(() => getPhotos())
-  }
+    PhotoManager.deletePhoto(photo_id).then(() => getPhotos());
+  };
+
+  const makeButtons = () => {
+    if (details !== null) {
+      return props.currentUser.id === details.user_id ? (
+        <button onClick={() => deletePost()}>Delete Post</button>
+      ) : null;
+    }
+  };
 
   useEffect(() => {
     getPost();
     getComments();
-    getPhotos()
+    getPhotos();
   }, []);
 
-  return (
-    <>
-      {photos.map(photo => {return <PhotoComponent key={photo.id} photo={photo} deletePhoto={deletePhoto}/>})}
-      <h1>{details.manufacturer.name}</h1>
-      <h1>{details.model}</h1>
-      <h1>{details.colorway}</h1>
-      <em>
-        <h1>{details.description}</h1>
-      </em>
-      <button onClick={() => deletePost()}>Delete Post</button>
-      <form>
-        <fieldset>
-          <input
-            type="text"
-            onChange={handleFieldChange}
-            id="content"
-            placeholder="Add your comment here..."
-          />
-        </fieldset>
+  if (details !== null) {
+    return (
+      <>
+        {photos.map((photo) => {
+          return (
+            <PhotoComponent
+              key={photo.id}
+              photo={photo}
+              deletePhoto={deletePhoto}
+              {...props}
+            />
+          );
+        })}
+        <h1>{details.manufacturer.name}</h1>
+        <h1>{details.model}</h1>
+        <h1>{details.colorway}</h1>
+        <em>
+          <h1>{details.description}</h1>
+        </em>
+        {makeButtons()}
+        <form>
+          <fieldset>
+            <input
+              type="text"
+              onChange={handleFieldChange}
+              id="content"
+              placeholder="Add your comment here..."
+            />
+          </fieldset>
 
-        <button type="submit" onClick={handleCommentSubmit}>
-          Add comment
-        </button>
-      </form>
-      {comments.map((comment) => {
-        return (
-          <CommentCard
-            comment={comment}
-            deleteComment={deleteComment}
-            {...props}
-          />
-        );
-      })}
-    </>
-  );
+          <button type="submit" onClick={handleCommentSubmit}>
+            Add comment
+          </button>
+        </form>
+        {comments.map((comment) => {
+          return (
+            <CommentCard
+              comment={comment}
+              deleteComment={deleteComment}
+              {...props}
+            />
+          );
+        })}
+      </>
+    );
+  } else {
+    return <h1>Loading...</h1>
+  }
 };
 
 export default PostDetail;

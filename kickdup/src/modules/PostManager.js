@@ -5,9 +5,9 @@ const PostManager = {
     return fetch(`${baseUrl}/posts`).then((resp) => resp.json());
   },
   getFilteredByUser(user_id) {
-    return fetch(`${baseUrl}/posts`)
-      .then((resp) => resp.json())
-      .then((posts) => posts.filter((post) => (post.user_id = user_id)));
+    return fetch(`${baseUrl}/posts?user=${user_id}`).then((resp) =>
+      resp.json()
+    );
   },
   getOne(id) {
     return fetch(`${baseUrl}/posts/${id}`).then((resp) => resp.json());
@@ -30,9 +30,8 @@ const PostManager = {
         "Content-Type": "application/json",
         Authorization: `Token ${sessionStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ description: description})
-    })
-
+      body: JSON.stringify({ description: description }),
+    });
   },
   deletePost(post_id) {
     return fetch(`${baseUrl}/posts/${post_id}`, {

@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import UserManager from "../modules/UserRetrieve"
 import { Switch, Route } from "react-router-dom";
 import Register from "./auth_and_login/Register";
 import Login from "./auth_and_login/Login";
@@ -11,13 +12,23 @@ import AllPostsView from "./posts/AllPosts";
 import PostEditForm from "./posts/PostEdit"
 
 const BodyRouter = (props) => {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const getUser = () => {
+    UserManager.getCurrentUser().then((resp) => setCurrentUser(resp[0]));
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <Switch>
       <Route
         exact
         path="/"
         render={(routerProps) => {
-          return <AllPostsView routerProps={routerProps} />;
+          return <AllPostsView routerProps={routerProps} currentUser={currentUser} />;
         }}
       />
       <Route
@@ -38,21 +49,21 @@ const BodyRouter = (props) => {
         exact
         path="/users/:userId(\d+)"
         render={(routerProps) => {
-          return <Profile routerProps={routerProps} />;
+          return <Profile routerProps={routerProps} currentUser={currentUser}/>;
         }}
       />
       <Route
         exact
         path="/newpost"
         render={(routerProps) => {
-          return <PostAddForm routerProps={routerProps} />;
+          return <PostAddForm routerProps={routerProps} currentUser={currentUser}/>;
         }}
       />
       <Route
         exact
         path="/posts/:postId(\d+)"
         render={(routerProps) => {
-          return <PostDetail routerProps={routerProps} />;
+          return <PostDetail routerProps={routerProps} currentUser={currentUser}/>;
         }}
       />
       <Route
@@ -66,13 +77,13 @@ const BodyRouter = (props) => {
         exact
         path="/posts/:postId(\d+)/addphoto"
         render={(routerProps) => {
-          return <PhotoAddForm routerProps={routerProps} />;
+          return <PhotoAddForm routerProps={routerProps}/>;
         }}
       />
       <Route
         path="/comments/:commentId(\d+)/edit"
         render={(routerProps) => {
-          return <UpdateCommentForm routerProps={routerProps} />;
+          return <UpdateCommentForm routerProps={routerProps}/>;
         }}
       />
     </Switch>
