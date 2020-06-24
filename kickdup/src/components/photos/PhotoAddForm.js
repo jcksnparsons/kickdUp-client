@@ -7,12 +7,6 @@ const PhotoAddForm = (props) => {
     post_id: 0,
   });
 
-  const handleFieldChange = (evt) => {
-    const stateToChange = { ...photo };
-    stateToChange[evt.target.id] = evt.target.files[0];
-    setPhoto(stateToChange);
-  };
-
   const handleFileUpload = (e) => {
     setPhoto({
       imageFile: e.target.files[0],

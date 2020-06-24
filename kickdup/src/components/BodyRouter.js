@@ -5,12 +5,20 @@ import Login from "./auth_and_login/Login";
 import Profile from "./user_profile/Profile";
 import PostAddForm from "./posts/PostAddForm";
 import PostDetail from "./posts/PostDetail";
-import UpdateCommentForm from "./comments/UpdateComment"
+import UpdateCommentForm from "./comments/UpdateComment";
 import PhotoAddForm from "./photos/PhotoAddForm";
+import AllPostsView from "./posts/AllPosts";
 
 const BodyRouter = (props) => {
   return (
     <Switch>
+      <Route
+        exact
+        path="/"
+        render={(routerProps) => {
+          return <AllPostsView routerProps={routerProps} />;
+        }}
+      />
       <Route
         exact
         path="/register"
@@ -56,9 +64,9 @@ const BodyRouter = (props) => {
       <Route
         path="/comments/:commentId(\d+)/edit"
         render={(routerProps) => {
-          return <UpdateCommentForm routerProps={routerProps} />
+          return <UpdateCommentForm routerProps={routerProps} />;
         }}
-        />
+      />
     </Switch>
   );
 };
