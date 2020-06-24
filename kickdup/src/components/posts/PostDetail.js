@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostManager from "../../modules/PostManager";
 import CommentManager from "../../modules/CommentManager";
 import CommentCard from "../comments/CommentCard";
+import PhotoManager from "../../modules/PhotoManager";
 
 const PostDetail = (props) => {
   const postId = props.routerProps.match.params.postId;
@@ -17,11 +18,18 @@ const PostDetail = (props) => {
     post_id: postId,
     content: "",
   });
+  const [photos, setPhotos] = useState([]);
 
   const getPost = () => {
     PostManager.getOne(postId).then((resp) => {
       setDetails(resp);
     });
+  };
+
+  const getPhotos = () => {
+    PhotoManager.getPhotosForPost(
+      props.routerProps.match.params.postId
+    ).then((resp) => setPhotos(resp));
   };
 
   const handleFieldChange = (evt) => {
@@ -51,10 +59,12 @@ const PostDetail = (props) => {
   useEffect(() => {
     getPost();
     getComments();
+    getPhotos()
   }, []);
 
   return (
     <>
+      {photos.map(photo => {return <img src={photo.image} alt="photo" width="250" height="auto" />})}
       <h1>{details.manufacturer.name}</h1>
       <h1>{details.model}</h1>
       <h1>{details.colorway}</h1>
