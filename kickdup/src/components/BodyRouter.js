@@ -8,6 +8,7 @@ import PostDetail from "./posts/PostDetail";
 import UpdateCommentForm from "./comments/UpdateComment";
 import PhotoAddForm from "./photos/PhotoAddForm";
 import AllPostsView from "./posts/AllPosts";
+import PostEditForm from "./posts/PostEdit"
 
 const BodyRouter = (props) => {
   return (
@@ -52,6 +53,13 @@ const BodyRouter = (props) => {
         path="/posts/:postId(\d+)"
         render={(routerProps) => {
           return <PostDetail routerProps={routerProps} />;
+        }}
+      />
+      <Route
+        exact
+        path="/posts/:postId(\d+)/edit"
+        render={(routerProps) => {
+          return <PostEditForm routerProps={routerProps} />;
         }}
       />
       <Route

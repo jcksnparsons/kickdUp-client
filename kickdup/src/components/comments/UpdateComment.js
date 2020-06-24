@@ -31,7 +31,7 @@ const UpdateCommentForm = (props) => {
     <form>
       <h1>Edit Comment</h1>
       <input
-        type="test"
+        type="text"
         onChange={handleFieldChange}
         id="content"
         placeholder={commentInfo.content}
