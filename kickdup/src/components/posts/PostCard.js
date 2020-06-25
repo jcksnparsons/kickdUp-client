@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PhotoManager from "../../modules/PhotoManager";
 
 const PostCard = (props) => {
-  console.log(props)
+  console.log(props);
   const [firstPhoto, setFirstPhoto] = useState({ image: null });
 
   const getPhoto = () => {
@@ -16,13 +16,23 @@ const PostCard = (props) => {
   }, []);
 
   return (
-    <>
+    <div>
       {firstPhoto ? (
-        <img src={firstPhoto.image} alt="photo" height="auto" width="180" />
+        <div onClick={() => props.routerProps.history.push(`/posts/${props.post.id}`)}>
+          <img src={firstPhoto.image} alt="photo" height="auto" width="180" />{" "}
+        </div>
       ) : null}
+      <br />
+      <button
+        onClick={() =>
+          props.routerProps.history.push(`/users/${props.post.user_id}`)
+        }
+      >
+        {props.post.user.username}
+      </button>
       <p>{props.post.manufacturer.name}</p>
       <p>{props.post.model}</p>
-    </>
+    </div>
   );
 };
 
