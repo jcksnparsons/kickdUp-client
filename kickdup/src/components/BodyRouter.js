@@ -29,7 +29,7 @@ const BodyRouter = (props) => {
         path="/"
         render={(routerProps) => {
           return (
-            <AllPostsView routerProps={routerProps} currentUser={currentUser} />
+            <AllPostsView currentUser={currentUser} routerProps={routerProps} />
           );
         }}
       />

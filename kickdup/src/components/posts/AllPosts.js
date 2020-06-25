@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PostCard from "../posts/PostCard";
 import PostManager from "../../modules/PostManager";
 
-const AllPostsView = (routerProps) => {
+const AllPostsView = (props) => {
   const [posts, setPosts] = useState([]);
 
   const getAllPosts = () => {
@@ -12,7 +12,7 @@ const AllPostsView = (routerProps) => {
   const createPostCards = (arr) => {
     if (arr.length > 0) {
       return arr.map((post) => {
-        return <PostCard key={post.id} post={post} routerProps={routerProps} />;
+        return <PostCard key={post.id} post={post} routerProps={props.routerProps} />;
       });
     }
   };
