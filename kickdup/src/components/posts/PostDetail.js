@@ -57,11 +57,16 @@ const PostDetail = (props) => {
   };
 
   const makeButtons = () => {
-    console.log("This needs user info!")
-    console.log(props.currentUser)
+    console.log("This needs user info!");
+    console.log(props.currentUser);
     if (details !== null && props.currentUser !== null) {
       return props.currentUser.id === details.user_id ? (
-        <button onClick={() => deletePost()}>Delete Post</button>
+        <div>
+          <button onClick={() => deletePost()}>Delete Post</button>
+          <button onClick={() => props.routerProps.history.push(`/posts/${details.id}/edit`)}>
+            Edit Post
+          </button>
+        </div>
       ) : null;
     }
   };
@@ -118,7 +123,7 @@ const PostDetail = (props) => {
       </>
     );
   } else {
-    return <h1>Loading...</h1>
+    return <h1>Loading...</h1>;
   }
 };
 

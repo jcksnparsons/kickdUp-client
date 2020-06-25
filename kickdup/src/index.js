@@ -1,16 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router } from 'react-router-dom'
-import BodyRouter from './components/BodyRouter';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import NavBar from "./components/nav/Navbar"
+import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter as Router } from "react-router-dom";
+import BodyRouter from "./components/BodyRouter";
 
 ReactDOM.render(
   <Router>
+    <NavBar />
     <BodyRouter />
   </Router>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
