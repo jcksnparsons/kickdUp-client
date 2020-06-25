@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import UserManager from "../../modules/UserRetrieve";
 
 const NavBar = (props) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(undefined);
 
   const getUser = () => {
-    UserManager.getCurrentUser().then((resp) => setCurrentUser(resp));
+    UserManager.getCurrentUser().then((resp) => setCurrentUser(resp[0]));
   };
 
   useEffect(() => {
@@ -15,13 +15,17 @@ const NavBar = (props) => {
   return (
     <header>
       <h2>KickdUp</h2>
-      {currentUser !== null ? (
-        currentUser.detail === "Invalid token." ? (
-          <button>Login</button>
-        ) : (
-          <button>YourProfile</button>
+      {currentUser !== undefined ? (
+        currentUser.detail === "Invalid token." ? null : (
+          <button
+            onClick={() => props.history.push(`/users/${currentUser.id}`)}
+          >
+            YourProfile
+          </button>
         )
-      ) : null}
+      ) : (
+        <button onClick={() => props.history.push("/login")}>Login</button>
+      )}
     </header>
   );
 };
