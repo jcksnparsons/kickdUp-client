@@ -18,7 +18,9 @@ const NavBar = (props) => {
       {currentUser !== undefined ? (
         currentUser.detail === "Invalid token." ? null : (
           <button
-            onClick={() => props.history.push(`/users/${currentUser.id}`)}
+            onClick={() => {
+              props.history.push(`/users/${currentUser.id}`);
+            }}
           >
             YourProfile
           </button>

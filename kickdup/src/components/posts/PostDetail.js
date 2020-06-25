@@ -40,7 +40,7 @@ const PostDetail = (props) => {
 
   const deletePost = () => {
     PostManager.deletePost(postId).then(
-      props.routerProps.history.push(`${props.routerProps.match.params.postId}`)
+      props.routerProps.history.push(`/users/${props.currentUser.id}`)
     );
   };
 

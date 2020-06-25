@@ -7,6 +7,8 @@ const Profile = ({ routerProps }) => {
   const [user, setUser] = useState({ username: "" });
   const [userPosts, setUserPosts] = useState([]);
 
+  const userId = routerProps.match.params.userId;
+
   const getUser = (user_id) => {
     UserManager.userRetrieve(user_id).then((resp) => setUser(resp));
   };
@@ -16,11 +18,11 @@ const Profile = ({ routerProps }) => {
   };
 
   useEffect(() => {
-    const userId = routerProps.match.params.userId;
+    
 
     getUser(userId);
     getPosts(userId);
-  }, []);
+  }, [userId]);
 
   const createPosts = (postArray) => {
     if (postArray.length > 0) {
