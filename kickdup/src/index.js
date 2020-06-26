@@ -5,6 +5,7 @@ import NavBar from "./components/nav/Navbar";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import BodyRouter from "./components/BodyRouter";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 ReactDOM.render(
   <Router>
