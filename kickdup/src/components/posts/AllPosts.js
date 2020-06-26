@@ -12,7 +12,9 @@ const AllPostsView = (props) => {
   const createPostCards = (arr) => {
     if (arr.length > 0) {
       return arr.map((post) => {
-        return <PostCard key={post.id} post={post} routerProps={props.routerProps} />;
+        return (
+          <PostCard key={post.id} post={post} routerProps={props.routerProps} />
+        );
       });
     }
   };
@@ -21,7 +23,11 @@ const AllPostsView = (props) => {
     getAllPosts();
   }, []);
 
-  return <>{createPostCards(posts)}</>;
+  return (
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      {createPostCards(posts)}
+    </div>
+  );
 };
 
-export default AllPostsView
+export default AllPostsView;
