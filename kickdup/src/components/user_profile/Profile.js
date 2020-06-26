@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import UserManager from "../../modules/UserRetrieve";
 import PostManager from "../../modules/PostManager";
 import PostCard from "../posts/PostCard";
+import { Button } from "reactstrap"
 
 const Profile = ({ routerProps, currentUser }) => {
   const [user, setUser] = useState({ username: "" });
@@ -33,7 +34,7 @@ const Profile = ({ routerProps, currentUser }) => {
   return (
     <div>
       <h1>{user.username}</h1>
-      {currentUser && currentUser.id === user.id ? <button onClick={() => routerProps.history.push("/newpost")}>Add a new post</button> : null}
+      {currentUser && currentUser.id === user.id ? <Button onClick={() => routerProps.history.push("/newpost")}>Add a new post</Button> : null}
       {user.username ? createPosts(userPosts) : null}
     </div>
   );

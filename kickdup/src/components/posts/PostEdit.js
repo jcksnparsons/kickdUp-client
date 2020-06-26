@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PostManager from "../../modules/PostManager";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const PostEditForm = (props) => {
   const [post, setPost] = useState({});
@@ -29,16 +30,20 @@ const PostEditForm = (props) => {
 
   return (
     <>
-      <form>
-        <h1>Edit Description</h1>
-        <input
-          type="text"
-          onChange={handleFieldChange}
-          id="description"
-          placeholder={post.description}
-        />
-        <button onClick={handleSubmit}>Submit</button>
-      </form>
+    <div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: '2rem'}}>
+      <Form style={{width: '80%'}}>
+        <FormGroup>
+          <Label>Edit Description</Label>
+          <Input
+            type="text"
+            onChange={handleFieldChange}
+            id="description"
+            placeholder={post.description}
+          />
+        </FormGroup>
+        <Button onClick={handleSubmit}>Submit</Button>
+      </Form>
+      </div>
     </>
   );
 };

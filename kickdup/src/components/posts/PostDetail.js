@@ -4,6 +4,16 @@ import CommentManager from "../../modules/CommentManager";
 import CommentCard from "../comments/CommentCard";
 import PhotoManager from "../../modules/PhotoManager";
 import PhotoComponent from "../photos/PhotoComponent";
+import {
+  Spinner,
+  Card,
+  Button,
+  CardTitle,
+  Form,
+  Input,
+  CardSubtitle,
+  CardText,
+} from "reactstrap";
 
 const PostDetail = (props) => {
   const postId = props.routerProps.match.params.postId;
@@ -60,21 +70,25 @@ const PostDetail = (props) => {
     if (details !== null && props.currentUser !== null) {
       return props.currentUser.id === details.user_id ? (
         <div>
-          <button
+          <Button
+            style={{ margin: ".5rem" }}
             onClick={() =>
               props.routerProps.history.push(`/posts/${details.id}/addphoto`)
             }
           >
             Add Photo
-          </button>
-          <button onClick={() => deletePost()}>Delete Post</button>
-          <button
+          </Button>
+          <Button style={{ margin: ".5rem" }} onClick={() => deletePost()}>
+            Delete Post
+          </Button>
+          <Button
+            style={{ margin: ".5rem" }}
             onClick={() =>
               props.routerProps.history.push(`/posts/${details.id}/edit`)
             }
           >
             Edit Post
-          </button>
+          </Button>
         </div>
       ) : null;
     }
@@ -89,37 +103,45 @@ const PostDetail = (props) => {
   if (details !== null) {
     return (
       <>
-        {photos.map((photo) => {
-          return (
-            <PhotoComponent
-              key={photo.id}
-              photo={photo}
-              deletePhoto={deletePhoto}
-              {...props}
-            />
-          );
-        })}
-        <h1>{details.manufacturer.name}</h1>
-        <h1>{details.model}</h1>
-        <h1>{details.colorway}</h1>
-        <em>
-          <h1>{details.description}</h1>
-        </em>
-        {makeButtons()}
-        <form>
-          <fieldset>
-            <input
-              type="text"
-              onChange={handleFieldChange}
-              id="content"
-              placeholder="Add your comment here..."
-            />
-          </fieldset>
+        <Card>
+          {photos.map((photo) => {
+            return (
+              <PhotoComponent
+                key={photo.id}
+                photo={photo}
+                deletePhoto={deletePhoto}
+                {...props}
+              />
+            );
+          })}
+          
+          <CardTitle>{details.manufacturer.name}</CardTitle>
+          <CardTitle>{details.model}</CardTitle>
+          <CardTitle>{details.colorway}</CardTitle>
+          <br />
+          <em>
+            <CardSubtitle style={{display: 'flex', justifyContent: 'space-around'}}>{details.description}</CardSubtitle>
+          </em>
+          <br />
+          <CardText>
+            Posted by <em>{details.user.username}</em>
+          </CardText>
+        </Card>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {makeButtons()}
+        </div>
+        <Form>
+          <Input
+            type="text"
+            onChange={handleFieldChange}
+            id="content"
+            placeholder="Add your comment here..."
+          />
 
-          <button type="submit" onClick={handleCommentSubmit}>
+          <Button style={{margin: '.5rem'}} type="submit" onClick={handleCommentSubmit}>
             Add comment
-          </button>
-        </form>
+          </Button>
+        </Form>
         {comments.map((comment) => {
           return (
             <CommentCard
@@ -132,7 +154,7 @@ const PostDetail = (props) => {
       </>
     );
   } else {
-    return <h1>Loading...</h1>;
+    return <Spinner></Spinner>;
   }
 };
 
