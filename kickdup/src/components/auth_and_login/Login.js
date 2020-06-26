@@ -59,7 +59,8 @@ const Login = ({ routerProps, getUser }) => {
             />
           </fieldset>
           <fieldset>
-            <button type="Submit">Register</button>
+            <button type="Submit">LogIn</button>
+            <button onClick={() => routerProps.history.push("/register")}>Create new account</button>
           </fieldset>
         </form>
       </section>

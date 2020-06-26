@@ -24,7 +24,7 @@ const AllPostsView = (props) => {
   }, []);
 
   return (
-    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <div style={{ display: "flex", justifyContent: "space-evenly", flexWrap: 'wrap' }}>
       {createPostCards(posts)}
     </div>
   );
