@@ -3,7 +3,7 @@ import UserManager from "../../modules/UserRetrieve";
 import PostManager from "../../modules/PostManager";
 import PostCard from "../posts/PostCard";
 
-const Profile = ({ routerProps }) => {
+const Profile = ({ routerProps, currentUser }) => {
   const [user, setUser] = useState({ username: "" });
   const [userPosts, setUserPosts] = useState([]);
 
@@ -18,16 +18,13 @@ const Profile = ({ routerProps }) => {
   };
 
   useEffect(() => {
-    
-
     getUser(userId);
     getPosts(userId);
-  }, [userId]);
+  }, [userId, currentUser]);
 
   const createPosts = (postArray) => {
     if (postArray.length > 0) {
       return postArray.map((post) => {
-        console.log(post);
         return <PostCard key={post.id} post={post} routerProps={routerProps} />;
       });
     }
@@ -36,6 +33,7 @@ const Profile = ({ routerProps }) => {
   return (
     <div>
       <h1>{user.username}</h1>
+      {currentUser && currentUser.id === user.id ? <button onClick={() => routerProps.history.push("/newpost")}>Add a new post</button> : null}
       {user.username ? createPosts(userPosts) : null}
     </div>
   );

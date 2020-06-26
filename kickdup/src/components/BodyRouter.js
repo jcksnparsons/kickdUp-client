@@ -44,7 +44,7 @@ const BodyRouter = (props) => {
         exact
         path="/login"
         render={(routerProps) => {
-          return <Login routerProps={routerProps} />;
+          return <Login getUser={getUser} routerProps={routerProps} />;
         }}
       />
       <Route
