@@ -1,30 +1,44 @@
 import React from "react";
+import {
+  Card,
+  CardTitle,
+  CardText,
+  UncontrolledTooltip,
+  CardSubtitle,
+  Button,
+} from "reactstrap";
 
 const CommentCard = (props) => {
   return (
-    <>
-      <h4>
-        <em>{props.comment.user.username}</em>
-      </h4>
-      <h2>{props.comment.content}</h2>
-      {props.currentUser !== null &&
-      props.currentUser.id === props.comment.user_id ? (
-        <div>
-          <button
-            onClick={() =>
-              props.routerProps.history.push(
-                `/comments/${props.comment.id}/edit`
-              )
-            }
-          >
-            Edit
-          </button>
-          <button onClick={() => props.deleteComment(props.comment.id)}>
-            Delete
-          </button>
-        </div>
-      ) : null}
-    </>
+    <div>
+      <Card style={{ width: "60%", padding: ".5rem" }}>
+        <CardSubtitle
+          onClick={() =>
+            props.routerProps.history.push(`/users/${props.comment.user_id}`)
+          }
+        >
+          <em>{props.comment.user.username}</em>
+        </CardSubtitle>
+        <CardTitle>{props.comment.content}</CardTitle>
+        {props.currentUser !== null &&
+        props.currentUser.id === props.comment.user_id ? (
+          <div>
+            <Button
+              onClick={() =>
+                props.routerProps.history.push(
+                  `/comments/${props.comment.id}/edit`
+                )
+              }
+            >
+              Edit
+            </Button>
+            <Button onClick={() => props.deleteComment(props.comment.id)}>
+              Delete
+            </Button>
+          </div>
+        ) : null}
+      </Card>
+    </div>
   );
 };
 

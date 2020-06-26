@@ -27,13 +27,23 @@ const NavBar = (props) => {
       <Nav className="mr-auto" navbar>
         {currentUser !== undefined ? (
           currentUser.detail === "Invalid token." ? null : (
-            <NavItem
-              onClick={() => {
-                props.history.push(`/users/${currentUser.id}`);
-              }}
-            >
-              Your Profile
-            </NavItem>
+            <>
+              <NavItem
+                onClick={() => {
+                  props.history.push(`/users/${currentUser.id}`);
+                }}
+              >
+                Your Profile
+              </NavItem>
+              <NavItem
+                onClick={() => {
+                  sessionStorage.clear();
+                  props.history.push("/");
+                }}
+              >
+                Logout
+              </NavItem>
+            </>
           )
         ) : (
           <NavItem onClick={() => props.history.push("/login")}>Login</NavItem>
